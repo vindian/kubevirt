@@ -10,10 +10,6 @@ spec:
     metadata:
       labels:
         kubevirt.io/os: rhel9
-    annotations:
-      vm.kubevirt.io/flavor: small
-      vm.kubevirt.io/os: rhel9
-      vm.kubevirt.io/workload: server
     spec:
       domain:
         cpu:
@@ -36,14 +32,14 @@ spec:
         - name: default
           pod: {}
       volumes:
-        - name: containerdisk
+        - name: rootdisk
           containerDisk:
             image: "registry.redhat.io/rhel9/rhel-guest-image" # Uses the official RHEL9 image
         - name: cloudinitdisk
           cloudInitNoCloud:
             userData: |
               #cloud-config
-              hostname: test-rhel9-vm1
+              hostname: test-rhel9-vm2
               users:
                 - name: cloud-user
                   ssh_authorized_keys:
